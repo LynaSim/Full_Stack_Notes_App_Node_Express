@@ -1,0 +1,30 @@
+{
+  "name": "full_stack_notes_app_node_express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LynaSim/Full_Stack_Notes_App_Node_Express.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/LynaSim/Full_Stack_Notes_App_Node_Express/issues"
+  },
+  "homepage": "https://github.com/LynaSim/Full_Stack_Notes_App_Node_Express#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
