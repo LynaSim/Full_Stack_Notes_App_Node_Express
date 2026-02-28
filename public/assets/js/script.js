@@ -11,7 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
             dataList.innerHTML = ""; // Clear the list before rendering
             data.forEach((item) => {
                 const li = document.createElement("li");
-                li.textContent = item.id + ": " + JSON.stringify(item);
+                //only display the text from json
+                li.textContent = item.text;
+                // li.textContent = item.id + ": " + JSON.stringify(item);
                 dataList.appendChild(li);
             });
 
