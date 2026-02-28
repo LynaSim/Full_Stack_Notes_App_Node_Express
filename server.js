@@ -51,6 +51,18 @@ app.post("/data", (req, res) => {
   res.json({ message: "Data saved successfully", data: newData });
 });
 
+// Handle DELETE request to delete data by ID
+app.delete("/data/:id", (req, res) => {
+  const data = readData();
+  const filteredData = data.filter((item) => item.id !== req.params.id);
+
+  if (data.length === filteredData.length) {
+    return res.status(404).json({ message: "Data not found" });
+  }
+
+  writeData(filteredData);
+  res.json({ message: "Data deleted successfully" });
+});
 
 // 404 Middleware to handle all routes that were not defined
 app.use((req, res) => {

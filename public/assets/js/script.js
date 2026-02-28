@@ -12,9 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
             data.forEach((item) => {
                 const li = document.createElement("li");
                 //only display the text from json
+                li.id = item.id;
+                li.classList = "noteLi";
                 li.textContent = item.text;
                 // li.textContent = item.id + ": " + JSON.stringify(item);
                 dataList.appendChild(li);
+                //Adds a delete button element to each note, with ID atribute
+                const delBtn = document.createElement("button");
+                delBtn.textContent = "Delete note";
+                delBtn.id = item.id;
+                delBtn.classList.add("delBtn");
+                li.appendChild(delBtn);
+                
             });
 
         } catch (error) {
@@ -42,6 +51,26 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error adding data:", error);
         }
     });
+
+    // Handle form submission to delete data
+  dataList.addEventListener("click", async (event) => {
+    // Check if the clicked element is a delete button
+    if (event.target.classList.contains("delBtn")) {
+      const id = event.target.getAttribute("id");
+
+      try {
+        const response = await fetch(`/data/${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          fetchData(); // Refresh the list after deleting
+        }
+      } catch (error) {
+        console.error("Error deleting data", error);
+      }
+    }
+  });
 
     // Fetch data on page load
     fetchData();
