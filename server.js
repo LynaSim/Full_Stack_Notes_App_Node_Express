@@ -51,6 +51,33 @@ app.post("/data", (req, res) => {
   res.json({ message: "Data saved successfully", data: newData });
 });
 
+// Handle GET request to retrieve data by ID
+app.get("/data/:id", (req, res) => {
+  const data = readData();
+  const item = data.find((item) => item.id === req.params.id);
+  if (!item) {
+    return res.status(404).json({ message: "Data not found" });
+  }
+  res.json(item);
+});
+
+// TODO: Handle PUT request to update data by ID
+app.put("/data/:id", (req, res) => {
+  const data = readData();
+  const index = data.findIndex((item) => item.id === req.params.id);
+
+  if (index === -1) {
+    return res.status(404).json({ message: "Data not found" });
+  }
+
+  // Update the item while preserving the original ID
+  const updatedItem = { ...data[index], ...req.body, id: req.params.id };
+  data[index] = updatedItem;
+
+  writeData(data);
+  res.json({ message: "Data updated successfully", data: updatedItem });
+});
+
 // Handle DELETE request to delete data by ID
 app.delete("/data/:id", (req, res) => {
   const data = readData();
