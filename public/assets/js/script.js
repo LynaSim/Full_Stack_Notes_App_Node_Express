@@ -2,7 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const dataList = document.getElementById("data-list");
   const dataForm = document.getElementById("data-form");
   const dataInput = document.getElementById("data-input");
-  const editMode = document.getElementById("edit-mode-div");
+  const editForm = document.getElementById("edit-form");
+  const editField = document.getElementById("edit-field");
+  const inputEl = document.querySelector(".edit-input-el");
 
   // Function to fetch data from the backend
   const fetchData = async () => {
@@ -58,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+
   // Handle click event to delete data
   dataList.addEventListener("click", async (event) => {
     // Check if the clicked element is a delete button
@@ -79,17 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  // Function to UPDATE data
-  const updateData = async () => {
-    const editForm = document.getElementById("edit-form");
-    const editField = document.getElementById("edit-field");
-    const inputEl = document.querySelector(".edit-input-el");
-
-
-  };
-
-
-
   // Handle click event to enter edit-mode
   dataList.addEventListener("click", (event) => {
     // Check if the clicked element is an EDIT button
@@ -98,22 +90,46 @@ document.addEventListener("DOMContentLoaded", () => {
       const note = document.getElementById(`${id}`).textContent; //get text
       // dataList.innerHTML = `id captured: ${id} and li: ${note}`;//test
 
-      const editForm = document.getElementById("edit-form");
+      // const editForm = document.getElementById("edit-form");
       editForm.hidden = false;
       dataForm.hidden = true;
       dataList.hidden = true;
-      const editField = document.getElementById("edit-field");
-      editField.textcontext = note ;
-      const inputEl = document.querySelector(".edit-input-el");
+      // const editField = document.getElementById("edit-field");
+      editField.value = note;
+      // const inputEl = document.querySelector(".edit-input-el");
       inputEl.dataset.id = id;
     }
   });
 
+  // Function to UPDATE data
+  // const updateData = async () => {
+  //   const editForm = document.getElementById("edit-form");
+  //   const editField = document.getElementById("edit-field");
+  //   const inputEl = document.querySelector(".edit-input-el");
 
+  // };
 
+  // Handle submit form to UPDATE data
+  editForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    console.log("ok");
+    const id = inputEl.dataset.id;
+    const updatedText = editField.value;
 
+    try {
+      const response = await fetch(`/data/${id}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text: updatedText }) });
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result.message);
 
+        editForm.hidden = true;
+        dataForm.hidden = false;
+        dataList.hidden = false;
 
+        fetchData();
+      } else { alert("Failed"); } 
+    } catch (error) { console.error("Error updating data:", error); }
+  });
 
 
   // Fetch data on page load
