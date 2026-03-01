@@ -21,13 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
         //Adds a DELETE button element to each note, with ID attribute
         const delBtn = document.createElement("button");
         delBtn.textContent = "Delete note";
-        delBtn.id = item.id;
+        delBtn.dataset.id = item.id;
         delBtn.classList.add("delBtn");
         li.appendChild(delBtn);
         //Adds an EDIT button
         const editBtn = document.createElement("button");
         editBtn.textContent = "Edit note";
-        editBtn.id = item.id;
+        editBtn.dataset.id = item.id;
         editBtn.classList.add("editBtn");
         li.appendChild(editBtn);
       });
@@ -58,11 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Handle button click to delete data
+  // Handle click event to delete data
   dataList.addEventListener("click", async (event) => {
     // Check if the clicked element is a delete button
     if (event.target.classList.contains("delBtn")) {
-      const id = event.target.getAttribute("id");
+      const id = event.target.getAttribute("data-id");
 
       try {
         const response = await fetch(`/data/${id}`, {
@@ -78,60 +78,43 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Handle button click to edit data
-  dataList.addEventListener("click", async (event) => {
+
+  // Function to UPDATE data
+  const updateData = async () => {
+    const editForm = document.getElementById("edit-form");
+    const editField = document.getElementById("edit-field");
+    const inputEl = document.querySelector(".edit-input-el");
+
+
+  };
+
+
+
+  // Handle click event to enter edit-mode
+  dataList.addEventListener("click", (event) => {
     // Check if the clicked element is an EDIT button
     if (event.target.classList.contains("editBtn")) {
-      const id = event.target.getAttribute("id");
-      const response = await fetch(`/data/${id}`);
-      const data = await response.json();
-      textAreaValue = data.text;
+      const id = event.target.getAttribute("data-id"); //get id
+      const note = document.getElementById(`${id}`).textContent; //get text
+      // dataList.innerHTML = `id captured: ${id} and li: ${note}`;//test
 
-      //Edit Mode
-      editMode.innerHTML = `<textarea type="text" id="${id}" rows=10 />${textAreaValue}</textarea><button class="saveBtn" type="submit">Save</button>`;
-
-      const textArea = document.querySelector("textarea");
-      const saveBtn = document.querySelector(".saveBtn");
-      saveBtn.addEventListener("click", async (event) => {
-        const updatedValue = textArea.value;
-        try {
-          const response = await fetch(`/data/${id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text: updatedValue })
-          });
-
-          if (response.ok) {
-            const response = await fetch("/data");
-            const data = await response.json();
-            const updatedList = fetchData()
-            editMode.innerHTML = updatedList;
-          }
-        } catch (error) {
-          console.error("Error updating data", error);
-        }
-      });
-
-
-      // //Edit Mode
-      // editMode.innerHTML = `<textarea type="text" id="${id}" rows=10 />${textAreaValue}</textarea><button class="saveBtn" type="submit">Save</button>`;
-
-      // const textArea = document.querySelector("textarea");
-      // editMode.addEventListener("click", async (event) => {
-      //   if (event.target.classList.contains("saveBtn")) {
-      //     const updatedValue = textArea.value;
-      //     editMode.innerHTML = `<p>${updatedValue} and id ${id}<p>`;
-      //     const response = await fetch(`/data/${id}`, {
-      //       method: "PUT",
-      //       headers: { "Content-Type": "application/json" },
-      //       body: JSON.stringify({ text: updatedValue }),
-      //     });
-      //     fetchData();
-      //   }
-      // });
+      const editForm = document.getElementById("edit-form");
+      editForm.hidden = false;
+      dataForm.hidden = true;
+      dataList.hidden = true;
+      const editField = document.getElementById("edit-field");
+      editField.textcontext = note ;
+      const inputEl = document.querySelector(".edit-input-el");
+      inputEl.dataset.id = id;
     }
-
   });
+
+
+
+
+
+
+
 
   // Fetch data on page load
   fetchData();

@@ -11,7 +11,13 @@
 <body>
     <div class="container">
         <h1>My Notes</h1>
-        <div id="edit-mode-div">
+        <form id="edit-form" hidden>
+            <h4>Edit Your Note</h4>
+            <input type="hidden" class="edit-input-el">
+            <textarea id="edit-field" rows="10" required></textarea>
+            <button type="submit" class="updateBtn">Save</button>
+        </form>
+        <div id="">
             <ul id="data-list"></ul>
             <form id="data-form">
                 <input type="text" id="data-input" placeholder="Enter new data" required>
