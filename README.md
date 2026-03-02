@@ -28,7 +28,7 @@ A lightweight, responsive web application for managing personal notes. This proj
 
 ## Installation
 
-* Clone the repository: `git clone https://github.com/your-username/your-repo-name.git`
+* Clone the repository: `git clone https://github.com/LynaSim/Full_Stack_Notes_App_Node_Express.git`
 
 * Install dependencies: `npm install`
 
