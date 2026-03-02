@@ -92,3 +92,7 @@ button {
 .divTxt {
     color:#191970;
 }
+
+textarea {
+    width: 100%;
+}

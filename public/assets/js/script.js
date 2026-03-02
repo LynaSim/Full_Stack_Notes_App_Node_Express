@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         li.classList.add("noteLi");
         dataList.appendChild(li);
         li.innerHTML = `<div class="divTxt" id="${id}">${text}</div>
-            <div class="divBtns" data-id="${id}"><button class="delBtn" data-id="${id}"><strong>Delete</strong></button><button class="editBtn" data-id="${id}"><strong>Edit</strong></button></div>`;
+            <div class="divBtns" data-id="${id}"><button class="delBtn" data-id="${id}">Delete</button><button class="editBtn" data-id="${id}">Edit</button></div>`;
       });
 
     } catch (error) {
