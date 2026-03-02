@@ -14,24 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
       dataList.innerHTML = ""; // Clear the list before rendering
       data.forEach((item) => {
         const li = document.createElement("li");
-        //only display the text from json
-        li.id = item.id;
-        li.classList = "noteLi";
-        li.textContent = item.text;
-        // li.textContent = item.id + ": " + JSON.stringify(item);
+        const id = item.id;
+        const text = item.text;
+        li.dataset.id = id;
+        li.classList.add("noteLi");
         dataList.appendChild(li);
-        //Adds a DELETE button element to each note, with ID attribute
-        const delBtn = document.createElement("button");
-        delBtn.textContent = "Delete note";
-        delBtn.dataset.id = item.id;
-        delBtn.classList.add("delBtn");
-        li.appendChild(delBtn);
-        //Adds an EDIT button
-        const editBtn = document.createElement("button");
-        editBtn.textContent = "Edit note";
-        editBtn.dataset.id = item.id;
-        editBtn.classList.add("editBtn");
-        li.appendChild(editBtn);
+        li.innerHTML = `<div class="divTxt" id="${id}">${text}</div>
+            <div class="divBtns" data-id="${id}"><button class="delBtn" data-id="${id}">Delete</button><button class="editBtn" data-id="${id}">Edit</button></div>`;
       });
 
     } catch (error) {
@@ -87,27 +76,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // Check if the clicked element is an EDIT button
     if (event.target.classList.contains("editBtn")) {
       const id = event.target.getAttribute("data-id"); //get id
-      const note = document.getElementById(`${id}`).textContent; //get text
-      // dataList.innerHTML = `id captured: ${id} and li: ${note}`;//test
+      const note = document.getElementById(id).textContent; //get text
 
-      // const editForm = document.getElementById("edit-form");
       editForm.hidden = false;
       dataForm.hidden = true;
       dataList.hidden = true;
-      // const editField = document.getElementById("edit-field");
       editField.value = note;
-      // const inputEl = document.querySelector(".edit-input-el");
       inputEl.dataset.id = id;
     }
   });
 
-  // Function to UPDATE data
-  // const updateData = async () => {
-  //   const editForm = document.getElementById("edit-form");
-  //   const editField = document.getElementById("edit-field");
-  //   const inputEl = document.querySelector(".edit-input-el");
-
-  // };
 
   // Handle submit form to UPDATE data
   editForm.addEventListener("submit", async (event) => {
@@ -127,10 +105,9 @@ document.addEventListener("DOMContentLoaded", () => {
         dataList.hidden = false;
 
         fetchData();
-      } else { alert("Failed"); } 
+      } else { alert("Failed"); }
     } catch (error) { console.error("Error updating data:", error); }
   });
-
 
   // Fetch data on page load
   fetchData();
