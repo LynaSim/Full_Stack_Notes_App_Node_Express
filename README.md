@@ -4,6 +4,9 @@
 
 A lightweight, responsive web application for managing personal notes. This project demonstrates a complete CRUD (Create, Read, Update, Delete) workflow using a Node/Express backend and a vanilla JavaScript frontend.
 
+To see it live on Render.com:
+(https://full-stack-notes-app-node-express.onrender.com)
+
 ## Features
 
 * Create: Add new notes via a dynamic form.
