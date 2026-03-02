@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #F8F9FA;
     text-align: center;
     margin: 20px;
 }
@@ -8,13 +8,15 @@ body {
 .container {
     max-width: 400px;
     margin: 0 auto;
-    background: white;
+    /* background: white; */
+    background:aliceblue;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    color: #333;
+h1,
+h2 {
+    color: #957DAD;
 }
 
 ul {
@@ -23,10 +25,12 @@ ul {
 }
 
 li {
-    background: #e3e3e3;
-    margin: 5px 0;
+    /* background: #e3e3e3; */
+    background:#CCCCFF;
+    margin: 10px 2px;
     padding: 10px;
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 form {
@@ -44,12 +48,47 @@ button {
     padding: 10px;
     width: 25%;
     border: none;
-    background: #28a745;
+    /* background: #28a745; */
     color: white;
     cursor: pointer;
     border-radius: 5px;
 }
 
-button:hover {
-    background: #218838;
+.divBtns {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.addBtn,
+.updateBtn {
+    margin-top:10px;
+    background: #ACE1AF;
+}
+
+.addBtn:hover,
+.updateBtn:hover {
+    margin-top:10px;
+    background: #01796F;
+}
+
+.delBtn {
+    background: #FFB7B2;
+}
+
+.delBtn:hover {
+    background:#CD5C5C;
+}
+
+.editBtn {
+    background: #87CEFA;
+}
+
+.editBtn:hover {
+    background:#6495ED;
+}
+
+.divTxt {
+    color:#191970;
 }
