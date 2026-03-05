@@ -4,27 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes App</title>
+    <title>Simple Notes App</title>
+     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>My Notes</h1>
+    <header>
+        <h1>Note to Self</h1>
+    </header>
+
+    <main class="container">
+        <div class="div-forms">
+        <form id="data-form">
+            <input type="text" id="data-input" placeholder="Type here..." required>
+            <button type="submit" class="addBtn"><strong>Add New Note</strong></button>
+        </form>
         <form id="edit-form" hidden>
             <h2>Edit Your Note</h2>
             <input type="hidden" class="edit-input-el">
             <textarea id="edit-field" rows="10" required></textarea>
             <button type="submit" class="updateBtn">Save</button>
         </form>
-        <div>
-            <ul id="data-list"></ul>
-            <form id="data-form">
-                <input type="text" id="data-input" placeholder="Type here..." required>
-                <button type="submit" class="addBtn"><strong>Add New Note</strong></button>
-            </form>
         </div>
-    </div>
+        <section>
+            <ul id="data-list"></ul>
+        </section>
+    </main>
+
+    <footer>Made by Lyna Sim, 2026. Powered with Node.js, Express,js and JSON.</footer>
     <script src="./assets/js/script.js"></script>
 </body>
 
